@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+  </head>
+  <body>
+    <h1>Login Form</h1>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br><br>
+      <input type="checkbox" id="rememberMe" name="rememberMe">
+      <label for="rememberMe">Remember me</label><br><br>
+      <input type="submit" value="Submit" onclick="login()">
+    </form>
+    <script>
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const rememberMe = document.getElementById("rememberMe").checked;
+        if (rememberMe) {
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
+        } else {
+          sessionStorage.setItem("username", username);
+          sessionStorage.setItem("password", password);
+        }
+        alert("Logged in successfully!");
+      }
+      window.onload = function() {
+        const savedUsername = localStorage.getItem("username") || sessionStorage.getItem("username");
+        const savedPassword = localStorage.getItem("password") || sessionStorage.getItem("password");
+        if (savedUsername && savedPassword) {
+          document.getElementById("username").value = savedUsername;
+          document.getElementById("password").value = savedPassword;
+          document.getElementById("rememberMe").checked = true;
+        }
+      }
+    </script>
+  </body>
+</html>
